@@ -30,8 +30,10 @@ def load_numbers_data(data_path):
 
 train_X, train_y = load_numbers_data("data/trainingDigits/")
 test_X, test_y = load_numbers_data("data/testDigits/")
+print("Actual values: \n{}".format(test_y))
 
 kNN = KNeighborsClassifier(n_neighbors=3)
 kNN.fit(train_X, train_y)
 prediction = kNN.predict(test_X)
+print('Prediction: \n{}'.format(prediction))
 print('The accuracy of the KNN is: {0}'.format(metrics.accuracy_score(prediction, test_y)))

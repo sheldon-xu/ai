@@ -13,17 +13,20 @@ def decision_tree_predict(decision_tree_classifier, train_test_data):
     train_X, test_X, train_y, test_y = train_test_data
     decision_tree_classifier.fit(train_X, train_y)
     prediction = decision_tree_classifier.predict(test_X)
-    return metrics.accuracy_score(prediction, test_y)
+    return prediction, metrics.accuracy_score(prediction, test_y)
 
 
 cancer_data = load_data()
+print("Actual values: \n{}".format(cancer_data[3]))
 
 # default settings
 default_tree = DecisionTreeClassifier()
-score = decision_tree_predict(default_tree, cancer_data)
+predict, score = decision_tree_predict(default_tree, cancer_data)
+print('Prediction: \n{}'.format(predict))
 print('The accuracy with default settings is: {0}'.format(score))
 
 # pre-pruning settings
 pre_pruning_tree = DecisionTreeClassifier(max_depth=3, max_leaf_nodes=3, min_samples_leaf=5)
-score = decision_tree_predict(pre_pruning_tree, cancer_data)
+predict, score = decision_tree_predict(pre_pruning_tree, cancer_data)
+print('Prediction: \n{}'.format(predict))
 print('The accuracy with pre-pruning settings is: {0}'.format(score))
